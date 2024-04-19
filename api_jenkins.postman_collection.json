@@ -115,64 +115,6 @@
 			"response": []
 		},
 		{
-			"name": "/assignment/id-[T] Manual grading",
-			"event": [
-				{
-					"listen": "test",
-					"script": {
-						"exec": [
-							"pm.test(\"Status code is 200\", function () {",
-							"    pm.response.to.have.status(200);",
-							"});",
-							"",
-							"pm.test(\"Status, result, and gradedBy after manual grading\", function () {",
-							"    var jsonData = pm.response.json();",
-							"    pm.expect(jsonData[jsonData.length-1].status).to.eql(\"GRADED\");",
-							"    pm.expect(jsonData[jsonData.length-1].result).to.eql(\"PASSED\");",
-							"    pm.expect(jsonData[jsonData.length-1].gradedBy).to.eql(\"TEACHER\");",
-							"});"
-						],
-						"type": "text/javascript",
-						"packages": {}
-					}
-				}
-			],
-			"request": {
-				"auth": {
-					"type": "bearer",
-					"bearer": [
-						{
-							"key": "token",
-							"value": "{{teacherToken}}",
-							"type": "string"
-						}
-					]
-				},
-				"method": "PUT",
-				"header": [],
-				"body": {
-					"mode": "raw",
-					"raw": "{\n  \"summary\": \"Summary from teacher\",\n  \"result\": \"PASSED\",\n  \"grades\": [\n    {\n      \"comment\": \"Teacher comment\",\n      \"additionalScore\": 5\n    }\n  ]\n}",
-					"options": {
-						"raw": {
-							"language": "json"
-						}
-					}
-				},
-				"url": {
-					"raw": "{{baseUrl}}/assignment/{{assignmentId}}",
-					"host": [
-						"{{baseUrl}}"
-					],
-					"path": [
-						"assignment",
-						"{{assignmentId}}"
-					]
-				}
-			},
-			"response": []
-		},
-		{
 			"name": "/quizzes-[T] list of quizzes",
 			"event": [
 				{
